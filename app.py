@@ -1,30 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# Ruta principal
-@app.route('/')
+@app.route("/")
 def index():
-    return "¡Aplicación Flask funcionando! Visita /usuario para tu saludo."
+    return render_template("index.html")
 
-# Ruta de usuario con parámetro opcional
-@app.route('/usuario/', defaults={'nombre': 'Invitado'})
-@app.route('/usuario/<nombre>')
-def usuario(nombre):
-    return render_template('usuario.html', nombre=nombre)
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
-# Ruta con formulario para que el usuario ingrese su nombre
-@app.route('/formulario', methods=['GET', 'POST'])
-def formulario():
-    if request.method == 'POST':
-        nombre = request.form.get('nombre', 'Invitado')
-        return render_template('usuario.html', nombre=nombre)
-    return '''
-        <form method="POST">
-            Ingresa tu nombre: <input type="text" name="nombre">
-            <input type="submit" value="Enviar">
-        </form>
-    '''
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
