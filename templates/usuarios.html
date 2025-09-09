@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Lista de Usuarios</h2>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul style="color: green;">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+    </tr>
+    {% for usuario in usuarios %}
+    <tr>
+        <td>{{ usuario[0] }}</td>
+        <td>{{ usuario[1] }}</td>
+        <td>{{ usuario[2] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="/">Agregar Nuevo Usuario</a>
+{% endblock %}
